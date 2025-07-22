@@ -41,13 +41,20 @@ const projects = (await getCollection('project')).sort((a, b) => b.data.date.val
           </div>
 
           <div class="flex-none w-[180px] md:w-[200px] flex justify-center">
-            <svg viewBox="0 0 200 200" width="180" height="180" aria-label="Goose Labs logo with concentric circles">
-              <circle cx="100" cy="100" r="100" fill="#f97316" opacity="0.1"></circle>
-              <circle cx="100" cy="100" r="70" fill="#f97316" opacity="0.2"></circle>
-              <circle cx="100" cy="100" r="40" fill="#f97316" opacity="0.3"></circle>
-              <text x="100" y="118" text-anchor="middle" font-size="54" fill="#f97316" aria-label="Goose emoji">🪿</text
-              >
-            </svg>
+            <div class="relative">
+              <svg viewBox="0 0 200 200" width="180" height="180" aria-hidden="true">
+                <circle cx="100" cy="100" r="100" fill="#f97316" opacity="0.1"></circle>
+                <circle cx="100" cy="100" r="70" fill="#f97316" opacity="0.2"></circle>
+                <circle cx="100" cy="100" r="40" fill="#f97316" opacity="0.3"></circle>
+              </svg>
+              <img
+                src="/goose.png"
+                alt="Goose Labs logo"
+                width="50"
+                height="50"
+                class="absolute top-1/2 left-1/2 pl-1 transform -translate-x-1/2 -translate-y-1/2 object-contain"
+              />
+            </div>
           </div>
         </div>
       </section>
