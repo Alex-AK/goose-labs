@@ -1,68 +1,77 @@
-# Astro Starter Kit: Blog
+# Goose Labs
 
-```sh
-npm create astro@latest -- --template blog
+A digital playground for self-hosting, automation, and delightful experiments. Built with Astro, TypeScript, and TailwindCSS.
+
+## 🧾 About
+
+Goose Labs is a minimal, fast static website showcasing self-hosting adventures, automation projects, and technical explorations. The site serves as both a project portfolio and consulting services showcase.
+
+## ✨ Features
+
+- **Fast & Minimal**: Built with Astro for optimal performance
+- **Modern Stack**: TypeScript, TailwindCSS, and Markdown content
+- **SEO Optimized**: Semantic HTML, Open Graph tags, and sitemap
+- **Accessible**: WCAG compliant with proper ARIA labels
+- **Mobile-First**: Responsive design that works everywhere
+- **Zero JavaScript**: Pure HTML/CSS for maximum compatibility
+
+## 🚀 Quick Start
+
+```bash
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+
+# Build for production
+npm run build
+
+# Preview production build
+npm run preview
 ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/blog)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/blog)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/blog/devcontainer.json)
+## 📁 Project Structure
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+```
+src/
+├── components/          # Reusable UI components
+├── content/
+│   └── project/        # Markdown project logs
+├── layouts/            # Page layouts
+├── pages/              # Routes and pages
+├── styles/             # Global styles
+├── types.ts            # TypeScript type definitions
+└── consts.ts          # Site configuration
 
-![blog](https://github.com/withastro/astro/assets/2244813/ff10799f-a816-4703-b967-c78997e8323d)
-
-Features:
-
-- ✅ Minimal styling (make it your own!)
-- ✅ 100/100 Lighthouse performance
-- ✅ SEO-friendly with canonical URLs and OpenGraph data
-- ✅ Sitemap support
-- ✅ RSS Feed support
-- ✅ Markdown & MDX support
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-├── public/
-├── src/
-│   ├── components/
-│   ├── content/
-│   ├── layouts/
-│   └── pages/
-├── astro.config.mjs
-├── README.md
-├── package.json
-└── tsconfig.json
+public/                 # Static assets
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## 🎨 Customization
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+### Colors
 
-The `src/content/` directory contains "collections" of related Markdown and MDX documents. Use `getCollection()` to retrieve posts from `src/content/blog/`, and type-check your frontmatter using an optional schema. See [Astro's Content Collections docs](https://docs.astro.build/en/guides/content-collections/) to learn more.
+The color palette is defined in `tailwind.config.ts` and can be easily customized:
 
-Any static assets, like images, can be placed in the `public/` directory.
+- **Primary**: Orange (#f97316) - Main accent color
 
-## 🧞 Commands
+### Content
 
-All commands are run from the root of the project, from a terminal:
+- Site configuration: `src/consts.ts`
+- Project logs: `src/content/project/`
+- Pages: `src/pages/`
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+## 🛠️ Built With
 
-## 👀 Want to learn more?
+- [Astro](https://astro.build/) - Static site generator
+- [TypeScript](https://www.typescriptlang.org/) - Type safety
+- [TailwindCSS](https://tailwindcss.com/) - Utility-first styling
+- [Google Fonts](https://fonts.google.com/) - Roboto typography
 
-Check out [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+## 📄 License
 
-## Credit
+MIT License - feel free to use this project as inspiration for your own site!
 
-This theme is based off of the lovely [Bear Blog](https://github.com/HermanMartinus/bearblog/).
+## 📝 Note on Contributions
+
+This repository is public for transparency and learning purposes, but it's primarily a personal project. I'm not actively seeking contributions or maintaining typical open source project standards (issue tracking, PR reviews, etc.). Feel free to fork and adapt for your own use!

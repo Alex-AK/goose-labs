@@ -1,0 +1,74 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import ContactSection from '../components/ContactSection.astro';
+import { SITE_TITLE } from '../consts';
+import type { Service } from '../types';
+
+const title = 'Consulting & Freelance Services';
+const description =
+  'Professional consulting services for self-hosting, automation, and digital infrastructure. Available for freelance development work.';
+const contactEmail = 'hello@alex-ak.com';
+
+const services: Service[] = [
+  {
+    icon: '🔧',
+    title: 'Technical Consulting',
+    description:
+      'Architecture reviews, technology selection, performance optimization, and strategic technical guidance for your projects.',
+  },
+  {
+    icon: '💻',
+    title: 'Full-Stack Development',
+    description:
+      'Modern web applications using TypeScript, React, Next.js, Astro, and more. Clean code, excellent performance, and great user experience.',
+  },
+  {
+    icon: '⚙️',
+    title: 'Automation & DevOps',
+    description:
+      'Streamline your workflows with custom automation. CI/CD pipelines, infrastructure as code, monitoring solutions, and deployment strategies.',
+  },
+  {
+    icon: '🏠',
+    title: 'Self-Hosting Solutions',
+    description:
+      "Set up and optimize your own digital infrastructure. From home labs to production servers, I'll help you build reliable, scalable self-hosted solutions.",
+  },
+];
+---
+
+<BaseLayout title={title} description={description}>
+  <p slot="subtitle" class="text-xl text-gray-600">Let's build something amazing together.</p>
+
+  <section class="mb-16">
+    <h2 class="text-center mb-8 text-gray-900 text-2xl font-semibold">What I Can Help You With</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+      {
+        services.map((service) => (
+          <ServiceCard icon={service.icon} title={service.title} description={service.description} />
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="mb-16">
+    <h2 class="text-gray-900 mb-6 text-2xl font-semibold">My Approach</h2>
+    <div>
+      <p class="text-lg leading-relaxed text-gray-600 mb-8">
+        I believe in building solutions that are not just functional, but maintainable, scalable, and enjoyable to work
+        with. My experience with self-hosting and automation means I understand the importance of reliability and
+        simplicity.
+      </p>
+      <ul class="grid grid-cols-1 md:grid-cols-2 gap-2 list-none p-0">
+        <li class="text-gray-600 font-medium">✅ Clear communication throughout the project</li>
+        <li class="text-gray-600 font-medium">✅ Documentation and knowledge transfer</li>
+        <li class="text-gray-600 font-medium">✅ Modern, maintainable code practices</li>
+        <li class="text-gray-600 font-medium">✅ Focus on long-term sustainability</li>
+        <li class="text-gray-600 font-medium">✅ Transparent pricing and timelines</li>
+      </ul>
+    </div>
+  </section>
+
+  <ContactSection contactEmail={contactEmail} />
+</BaseLayout>

@@ -1,0 +1,56 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  showBackButton?: boolean;
+}
+
+const { title, description, showBackButton = false } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <BaseHead title={title} description={description} />
+  </head>
+
+  <body>
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:bg-orange-600 focus:text-white focus:px-4 focus:py-2 focus:rounded"
+    >
+      Skip to main content
+    </a>
+    <Header />
+    <main id="main-content" class="w-full">
+      <article class="max-w-4xl mx-auto px-4 py-8">
+        <header class="mb-12">
+          {
+            showBackButton && (
+              <div class="mb-4">
+                <a href="/" class="inline-flex items-center text-gray-600 hover:text-orange-600 transition-colors">
+                  <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                  </svg>
+                  Back
+                </a>
+              </div>
+            )
+          }
+
+          <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4 leading-tight">{title}</h1>
+          <slot name="subtitle" />
+          <hr class="border-gray-200 mt-8" />
+        </header>
+
+        <div class="prose prose-lg prose-orange max-w-none">
+          <slot />
+        </div>
+      </article>
+    </main>
+    <Footer />
+  </body>
+</html>

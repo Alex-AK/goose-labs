@@ -1,0 +1,36 @@
+---
+title: 'Discord Voice Notification Bot'
+description: 'A privacy-first, lightweight Discord bot that sends notifications when users join or leave voice channels.'
+status: 'Completed'
+date: 07-05-2025
+stack:
+  - Node.js
+  - Discord.js
+  - Docker
+  - Coolify
+github: 'https://github.com/Alex-AK/discord-voice-notifications'
+---
+
+## Project Overview
+
+A privacy-first, lightweight Discord bot that sends notifications when users join or leave voice channels. Built with TypeScript and designed for self-hosting with only essential dependencies. This bot is perfect for small communities looking to create a casual, low-pressure environment for spontaneous voice chats.
+
+### Features
+
+- **Smart Notifications:** Sends join/leave notifications with configurable delays to prevent spam.
+- **Privacy-First:** No external tracking, databases, or user data storage.
+- **Configurable:** Separate channels for join/leave, customizable timing, logging levels.
+- **Production Ready:** Health monitoring, graceful shutdown, notification retry mechanism, server logging.
+- **Built-in Monitoring:** Discord slash command for bot status and server statistics.
+- **HTTP Health Endpoint:** RESTful health check endpoint for uptime monitoring and external health checks.
+- **Modern Architecture:** TypeScript, modular design, comprehensive error handling.
+- **Self-Hosting:** Deploy anywhere - no external services required.
+
+## What I Learned
+
+- Leveraged **Discord.js** to listen for voice state events and send notifications.
+- Set up a Discord bot from scratch, including **authorization scopes** for bot access and permissions management.
+- Implemented **bot commands** to check runtime status and uptime for monitoring and debugging.
+- Deployed the bot to a **self-hosted Coolify instance**, enabling zero-downtime deployments and updates.
+- Learned how to structure and maintain a **fully open-source project** with documentation for others to deploy, modify, or contribute.
+

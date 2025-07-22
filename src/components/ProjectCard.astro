@@ -1,0 +1,48 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import Chip from './Chip.astro';
+
+type Props = CollectionEntry<'project'>;
+
+const project: Props = Astro.props;
+---
+
+<div
+  class="group rounded-xl border border-gray-200 bg-white shadow-sm hover:shadow-lg hover:border-gray-300 transition-all duration-300 p-6 cursor-pointer"
+  role="button"
+  tabindex="0"
+  onclick={`window.location.href='/project/${project.id}'`}
+  onkeydown={`if(event.key==='Enter'||event.key===' ')window.location.href='/project/${project.id}'`}
+>
+  <div class="flex justify-between items-start gap-4 mb-3">
+    <h3 class="text-xl font-semibold leading-tight flex-1">
+      {project.data.title}
+    </h3>
+    <Chip variant="primary">{project.data.status}</Chip>
+  </div>
+
+  <p class="text-gray-700 leading-relaxed mb-4">
+    {project.data.description}
+  </p>
+
+  <div class="flex flex-wrap gap-2">
+    {project.data.stack.slice(0, 4).map((tech) => <Chip variant="secondary">{tech}</Chip>)}
+    {project.data.stack.length > 4 && <Chip variant="secondary">+{project.data.stack.length - 4} more</Chip>}
+  </div>
+
+  {
+    project.data.github && (
+      <div class="text-right mt-4">
+        <a
+          class="text-sm text-orange-600 hover:text-orange-700 hover:underline transition-colors"
+          href={project.data.github}
+          target="_blank"
+          rel="noopener noreferrer"
+          onclick="event.stopPropagation()"
+        >
+          View Source Code
+        </a>
+      </div>
+    )
+  }
+</div>
