@@ -1,0 +1,25 @@
+---
+title: "Automated IP Change Detection"
+description: "A scheduled n8n workflow that checks for changes to my public IP and sends a Discord alert when it changes."
+status: "Completed"
+date: 07-24-2025
+stack: ["n8n", "PostgreSQL", "Discord", "Home Server"]
+---
+
+## Project Overview
+
+Built a scheduled IP monitoring workflow using n8n to track changes to my home network's public IP. This workflow runs hourly, compares the current IP with the previously logged one, and notifies me via Discord if the IP has changed. It helps ensure awareness of connectivity changes for self-hosted services running on a dynamic IP.
+
+### Features
+- **Hourly IP Check**: Runs every hour using the n8n Schedule Trigger node.
+- **Postgres Logging**: Fetches the most recent saved IP.
+- **Change Detection**: Compares current and previous IPs using conditional logic.
+- **IP Update**: Saves the new IP if a change is detected.
+- **Discord Notification**: Sends an alert if a change is detected.
+- **No-Op Branch**: Skips updates if the IP remains the same.
+
+## What I Learned
+- Deployed a **PostgreSQL database** to my home server and configured private network access.
+- Learned how to manage and evolve the **SQL schema using Prisma**.
+- Automated alerting with **Discord OAuth2** integration.
+- Gained better understanding of **IP monitoring**, dynamic IP issues, and when they occur.

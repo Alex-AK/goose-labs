@@ -26,7 +26,12 @@ const project: Props = Astro.props;
   </p>
 
   <div class="flex flex-wrap gap-2">
-    {project.data.stack.slice(0, 4).map((tech) => <Chip variant="secondary">{tech}</Chip>)}
+    {
+      project.data.stack
+        .sort()
+        .slice(0, 4)
+        .map((tech) => <Chip variant="secondary">{tech}</Chip>)
+    }
     {project.data.stack.length > 4 && <Chip variant="secondary">+{project.data.stack.length - 4} more</Chip>}
   </div>
 

@@ -21,7 +21,7 @@ const { title, description, date, status, stack, github } = Astro.props;
 
   <div class="mb-8">
     <div class="flex flex-wrap items-center gap-2 mb-4">
-      {stack.map((tech) => <Chip variant="secondary">{tech}</Chip>)}
+      {stack.sort().map((tech) => <Chip variant="secondary">{tech}</Chip>)}
     </div>
     {
       github && (

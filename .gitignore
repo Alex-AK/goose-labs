@@ -141,3 +141,6 @@ vite.config.ts.timestamp-*
 # macOS-specific files
 .DS_Store
 **/.DS_Store
+
+# Astro build output and generated files
+.astro/
