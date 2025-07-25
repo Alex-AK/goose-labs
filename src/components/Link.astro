@@ -1,0 +1,54 @@
+---
+interface Props {
+  href: string;
+  target?: string;
+  rel?: string;
+  class?: string;
+  variant?: 'primary' | 'secondary' | 'minimal';
+  size?: 'sm' | 'md' | 'lg';
+  external?: boolean;
+  onclick?: string;
+  [key: string]: any; // Allow other HTML attributes
+}
+
+const {
+  href,
+  target,
+  rel,
+  class: className = '',
+  variant = 'primary',
+  size = 'md',
+  external = false,
+  onclick,
+  ...rest
+} = Astro.props;
+
+// Auto-detect external links
+const isExternal = external || href.startsWith('http') || href.startsWith('mailto:');
+const finalTarget = target || (isExternal ? '_blank' : undefined);
+const finalRel = rel || (isExternal && finalTarget === '_blank' ? 'noopener noreferrer' : undefined);
+
+// Base classes for accessibility and touch targets
+const baseClasses =
+  'inline-block transition-colors focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 rounded';
+
+// Variant styles
+const variantClasses = {
+  primary: 'text-orange-800 hover:text-orange-900 hover:underline',
+  secondary: 'text-gray-700 hover:text-orange-800',
+  minimal: 'text-orange-800 hover:text-orange-900 no-underline hover:underline',
+};
+
+// Size styles
+const sizeClasses = {
+  sm: 'py-1 text-sm',
+  md: 'py-2',
+  lg: 'py-3 text-lg',
+};
+
+const finalClasses = `${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${className}`;
+---
+
+<a href={href} target={finalTarget} rel={finalRel} class={finalClasses} onclick={onclick} {...rest}>
+  <slot />
+</a>

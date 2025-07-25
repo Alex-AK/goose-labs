@@ -1,16 +1,12 @@
 ---
 import { SITE_TITLE, SOCIAL_LINKS } from '../consts';
+import Link from './Link.astro';
 ---
 
 <footer class="p-8 text-center">
   <div class="footer-content mx-auto">
     <p class="text-sm mt-2 text-gray-600">
-      {SITE_TITLE} by <a
-        href={SOCIAL_LINKS.portfolio}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="text-orange-600 hover:underline">Alex</a
-      >
+      {SITE_TITLE} by <Link href={SOCIAL_LINKS.portfolio} size="sm">Alex</Link>
     </p>
   </div>
 </footer>

@@ -1,6 +1,9 @@
 ---
+import { SOCIAL_LINKS } from '../consts';
+import Link from './Link.astro';
+
 interface Props {
-  contactEmail: string;
+  contactEmail?: string;
   responsePeriod?: string;
   includeInstructions?: boolean;
 }
@@ -17,9 +20,9 @@ const { contactEmail, responsePeriod = '24 hours', includeInstructions = true } 
     <div>
       <p class="text-xl mb-4">
         <strong>Email:</strong>
-        <a href={`mailto:${contactEmail}`} class="text-orange-500 no-underline font-medium hover:underline">
+        <Link href={`mailto:${contactEmail}`} variant="minimal" class="font-medium">
           {contactEmail}
-        </a>
+        </Link>
       </p>
       {
         includeInstructions && (
