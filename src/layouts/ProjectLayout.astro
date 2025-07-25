@@ -12,7 +12,7 @@ const { title, description, date, status, stack, github } = Astro.props;
 <BaseLayout title={title} description={description} showBackButton={true}>
   <div slot="subtitle" class="flex items-center gap-4 mb-8">
     <div class="flex items-center gap-4 ml-auto">
-      <span class="text-gray-500 text-sm">
+      <span class="text-gray-600 text-sm">
         <FormattedDate date={date} />
       </span>
       <Chip variant="primary">{status}</Chip>
