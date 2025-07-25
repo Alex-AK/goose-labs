@@ -1,6 +1,5 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Footer from '../components/Footer.astro';
+import MinimalLayout from '../layouts/MinimalLayout.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import { SITE_TITLE, SITE_DESCRIPTION, SOCIAL_LINKS } from '../consts';
 import { getCollection } from 'astro:content';
@@ -8,62 +7,48 @@ import { getCollection } from 'astro:content';
 const projects = (await getCollection('project')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-  </head>
+<MinimalLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
+  <main id="main-content" class="max-w-3xl mx-auto px-4 py-12 pb-0">
+    <section class="mb-20 mt-24">
+      <div class="flex flex-col md:flex-row items-center gap-8">
+        <div class="flex-1 min-w-[260px] md:min-w-[300px]">
+          <h1 class="text-4xl md:text-5xl text-orange-600 font-extrabold tracking-tight">
+            Welcome to {SITE_TITLE}
+          </h1>
+          <p class="text-xl text-gray-700 mb-4 leading-relaxed">{SITE_DESCRIPTION}</p>
 
-  <body>
-    <a
-      href="#main-content"
-      class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:bg-orange-600 focus:text-white focus:px-4 focus:py-2 focus:rounded"
-    >
-      Skip to main content
-    </a>
-    <main id="main-content" class="max-w-3xl mx-auto px-4 py-12 pb-0">
-      <section class="mb-20 mt-24">
-        <div class="flex flex-col md:flex-row items-center gap-8">
-          <div class="flex-1 min-w-[260px] md:min-w-[300px]">
-            <h1 class="text-4xl md:text-5xl text-orange-600 font-extrabold tracking-tight">
-              Welcome to {SITE_TITLE}
-            </h1>
-            <p class="text-xl text-gray-700 mb-4 leading-relaxed">{SITE_DESCRIPTION}</p>
+          <p class="text-sm mt-2 text-gray-600">
+            Created by <a
+              href={SOCIAL_LINKS.portfolio}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-orange-600 hover:underline">Alex</a
+            >
+          </p>
+        </div>
 
-            <p class="text-sm mt-2 text-gray-600">
-              Created by <a
-                href={SOCIAL_LINKS.portfolio}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="text-orange-600 hover:underline">Alex</a
-              >
-            </p>
-          </div>
-
-          <div class="flex-none w-[180px] md:w-[200px] flex justify-center">
-            <div class="relative">
-              <svg viewBox="0 0 200 200" width="180" height="180" aria-hidden="true">
-                <circle cx="100" cy="100" r="100" fill="#f97316" opacity="0.1"></circle>
-                <circle cx="100" cy="100" r="70" fill="#f97316" opacity="0.2"></circle>
-                <circle cx="100" cy="100" r="40" fill="#f97316" opacity="0.3"></circle>
-              </svg>
-              <img
-                src="/goose.png"
-                alt="Goose Labs logo"
-                width="50"
-                height="50"
-                class="absolute top-1/2 left-1/2 pl-1 transform -translate-x-1/2 -translate-y-1/2 object-contain"
-              />
-            </div>
+        <div class="flex-none w-[180px] md:w-[200px] flex justify-center">
+          <div class="relative">
+            <svg viewBox="0 0 200 200" width="180" height="180" aria-hidden="true">
+              <circle cx="100" cy="100" r="100" fill="#f97316" opacity="0.1"></circle>
+              <circle cx="100" cy="100" r="70" fill="#f97316" opacity="0.2"></circle>
+              <circle cx="100" cy="100" r="40" fill="#f97316" opacity="0.3"></circle>
+            </svg>
+            <img
+              src="/goose.png"
+              alt="Goose Labs logo"
+              width="50"
+              height="50"
+              class="absolute top-1/2 left-1/2 pl-1 transform -translate-x-1/2 -translate-y-1/2 object-contain"
+            />
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section class="flex flex-col gap-4 mb-20">
-        <h2 class="text-gray-900 text-3xl font-bold">Project Logs</h2>
-        {projects.map((project) => <ProjectCard {...project} />)}
-      </section>
-    </main>
-    <Footer />
-  </body>
-</html>
+    <section class="flex flex-col gap-4 mb-20">
+      <h2 class="text-gray-900 text-3xl font-bold">Project Logs</h2>
+      {projects.map((project) => <ProjectCard {...project} />)}
+    </section>
+  </main>
+</MinimalLayout>
