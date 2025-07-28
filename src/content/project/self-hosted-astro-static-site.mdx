@@ -1,0 +1,24 @@
+---
+title: "Self-Hosted Astro Static Site"
+description: "This site (gooselabs.tech) is built with Astro, hosted from my home server, and served globally through Cloudflare CDN."
+status: "Completed"
+date: 07-27-2025
+stack: ["Astro", "Home Server", "Cloudflare CDN", "Monitoring"]
+github: "https://github.com/Alex-AK/goose-labs"
+---
+
+## Project Overview
+
+This very site — `gooselabs.tech` — is built with Astro, deployed to my home server, and served globally through Cloudflare's CDN. The project involved building the site from scratch, configuring domain routing to point at my local machine, and setting up caching rules to keep performance fast while reducing load on my home network.
+
+### Features
+- **Astro Static Build**: Built from the ground up using Astro's content-first framework.
+- **Self-Hosted Deployment**: The static files are deployed to a home server running behind Cloudflare.
+- **Custom Domain**: The site is accessible at `gooselabs.tech` via DNS rules pointing to my home IP.
+- **Cloudflare CDN**: Edge caching dramatically reduces latency and shields the home server from direct traffic.
+- **Traffic Monitoring & Cache Rules**: Configured cache headers and Cloudflare rules to balance speed and control.
+
+## What I Learned
+- Set up an **Astro project from scratch**, including site layout, MDX content, and build configuration.
+- Configured **DNS rules and port forwarding** to expose the site externally while keeping it secure.
+- Used **Cloudflare** to monitor requests, optimize performance, and manage global caching strategy.
