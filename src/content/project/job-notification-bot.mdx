@@ -1,0 +1,41 @@
+---
+title: 'Job Notification Bot'
+description: 'A lightweight bot that sends notifications for job-related events.'
+status: 'Completed'
+date: 02-19-2026
+stack: ["n8n", "PostgreSQL", "Home Server", "SMTP"]
+---
+
+## Project Overview
+
+A scheduled n8n workflow that monitors a jobs API, tracks lifecycle state in PostgreSQL, and sends email alerts only for changes that have not already been sent. The pipeline is designed to be idempotent: each run refreshes current state, detects added/removed jobs, and records alert delivery status only after successful notification.
+
+### Notes
+
+- Runs every 1 hour and is intentionally assistive only - it does not automatically apply to jobs.
+- The current workflow is opinionated to one job source and is not yet generalized for multiple job APIs.
+- Built to support my partner's job search in a fast-moving, high-demand market by making new listing changes easier to catch.
+
+![n8n workflow for job notification bot](/job-bot-n8n.webp)
+
+
+### Features
+
+- **Scheduled Job Monitoring**: Runs on an interval and fetches source data through a session/token request followed by a jobs API request.
+- **State Diffing Logic**: Normalizes incoming jobs and handles all lifecycle cases: new jobs (`first_seen`/`last_seen`), existing jobs (`last_seen` refresh), and missing jobs (`removed_at` timestamp).
+- **Single Upsert State Sync**: Flattens diff output into one array so a single PostgreSQL upsert keeps the jobs table accurate on every run.
+- **Unsent-Only Alert Selection**: Joins jobs and alerts data to identify only added/removed events that have not been alerted yet.
+- **Human-Readable Message Formatting**: Builds conditional alert text with pluralization and section rendering only when added/removed lists are non-empty.
+- **Delivery-First Alert Tracking**: Sends email first, then upserts alert flags (`text_sent_added` / `text_sent_removed`) to prevent false sent states on failed delivery.
+- **Duplicate Alert Prevention**: Splits added and removed streams and tracks each event type independently so each job is alerted once per lifecycle event.
+
+
+## What I Learned
+
+- How to design an **idempotent monitoring pipeline** in n8n so repeated runs stay consistent and safe.
+- Better patterns for **branching and merge handoff** so downstream nodes keep both success gating and original array payloads.
+- Practical debugging of workflow edge cases like **empty upstream outputs**, malformed item shapes, and array handling errors.
+- How to implement **notification state tracking** that guarantees delivery-first semantics and avoids duplicate alerts.
+
+
+
