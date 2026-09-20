@@ -1,11 +1,5 @@
 // Shared types for the application
 
-export interface Service {
-  icon: string;
-  title: string;
-  description: string;
-}
-
 export interface ProjectData {
   title: string;
   description: string;

@@ -4,7 +4,7 @@ A digital playground for self-hosting, automation, and delightful experiments. B
 
 ## 🧾 About
 
-Goose Labs is a minimal, fast static website showcasing self-hosting adventures, automation projects, and technical explorations. The site serves as both a project portfolio and consulting services showcase.
+Goose Labs is a minimal, fast static website showcasing self-hosting adventures, automation projects, and technical explorations.
 
 ## ✨ Features
 
