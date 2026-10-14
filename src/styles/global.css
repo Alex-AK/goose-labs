@@ -47,6 +47,16 @@ h6 {
   font-size: 1rem;
 }
 
+.prose a {
+  color: var(--color-orange-700);
+  transition: color 200ms;
+}
+
+.prose a:hover {
+  color: var(--color-orange-800);
+  text-decoration: underline;
+}
+
 .prose code {
   padding: 0.125rem 0.25rem;
   background-color: #e5e7eb;
