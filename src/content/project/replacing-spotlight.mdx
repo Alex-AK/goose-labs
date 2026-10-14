@@ -40,26 +40,6 @@ It's built on [Hammerspoon](https://www.hammerspoon.org), which lets you script 
 
 ![The launcher confirming the task was added to Pikos](/launcher-captured.webp)
 
-## Fully customizable
-
-It's my code, so it does whatever I want. The whole ranking is one small function:
-
-```js
-// Name quality decides the band; launch count only orders apps within a band,
-// so a heavily used app can never outrank a better name match.
-function score(app, query) {
-  let band;
-  if (app.key === query) band = 4;
-  else if (app.key.startsWith(query)) band = 3;
-  else if (app.words.includes(" " + words(query)) || app.initials.startsWith(query)) band = 2;
-  else if (app.key.includes(query)) band = 1;
-  else return null;
-  return band * 100000 + app.uses;
-}
-```
-
-The Pikos capture and the workspaces are just other kinds of rows. Websites or a project's terminal session would work the same way.
-
 ## What I learned
 
 - ⌘Space can't be a normal hotkey. macOS keeps it reserved even after you untick Spotlight's shortcut, so the launcher catches the key press with an event tap. That needs Accessibility permission.
