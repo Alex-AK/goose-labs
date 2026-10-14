@@ -1,0 +1,71 @@
+---
+title: 'Replacing Spotlight'
+description: 'A small app launcher on ⌘Space that puts my recent apps up front and adds tasks straight into Pikos.'
+status: 'Ongoing'
+date: 10-14-2026
+stack: ["Hammerspoon", "Lua", "JavaScript", "Pikos"]
+---
+
+## Project overview
+
+I replaced Spotlight with my own launcher. ⌘Space opens it like before. The difference is it's faster, it mostly just opens apps, I can change anything about it, and it adds tasks straight into [Pikos](https://pikos.app), the local-first notes, tasks, and calendar app I'm building.
+
+Spotlight was bad at the one thing I used it for. It was slow to open and clunky to use. It surfaced things I didn't want. Typing "arc" put the Family settings pane above Arc, because the pane matches Apple Arcade and Spotlight weighs settings panes and past picks over the name. Every so often the apps I use most dropped out of its index entirely. Changing any of that meant digging through System Settings, for a tool that does far more than I need. No more Spotlight BS.
+
+The best part is recents. Open it with nothing typed and the five apps I opened last are right there. That one's huge.
+
+![The launcher open with nothing typed, listing the five apps opened last](/launcher-recents.webp)
+
+It's built on [Hammerspoon](https://www.hammerspoon.org), which lets you script macOS in Lua. I already had it running for a hotkey that toggles my terminal, so there was nothing new to install. The launcher is a Lua file and an HTML page in my config repo, which means a new laptop gets it along with everything else. Claude Code did most of the typing, and the first version came together in one morning.
+
+### Notes
+
+- I looked at the usual options first. Alfred is good, but its settings live in a bundle the app writes, which I keep out of my config repo. Raycast is a lot more app than I wanted.
+- It opens apps and my VS Code workspaces. There's no file search, and Spotlight is still in the menu bar for that.
+- The UI and its bugs are mine to maintain.
+
+### Features
+
+- Recently opened: Opening it with nothing typed shows the five apps I last opened through it, newest first.
+- Name decides the ranking: A better name match always wins. How often I open an app only breaks ties.
+- Quick capture into Pikos: Starting with `+` turns the bar into an inbox. Enter runs the Pikos CLI to add the text as a task, shows a check, and closes a second later. If the add fails, the launcher shows why, and reopens to say so if I'd already moved on.
+- VS Code workspaces: Every workspace file in one folder shows up beside the apps, and Enter opens it in VS Code.
+- An exclude list: Apps I never want to see, like Find My and Hammerspoon itself, are listed once and never show up. Finder lives outside the usual folders, so it's added by name.
+- New things show up on their own: It watches the Applications folder and the workspaces folder, and reindexes when something is added or removed.
+- Keyboard first: Arrow keys or Ctrl-N and Ctrl-P to move, Enter to open, and Escape to close and hand focus back to the app I was in. The mouse works too.
+- Local: No account and no sync. Nothing leaves the machine.
+
+![Typing "cal" lists Calculator and Calendar, with the matched letters in bold](/launcher-search.webp)
+
+![Typing "+ Lunch at noon" offers to add it to Pikos](/launcher-capture.webp)
+
+![The launcher confirming the task was added to Pikos](/launcher-captured.webp)
+
+## Fully customizable
+
+It's my code, so it does whatever I want. The whole ranking is one small function:
+
+```js
+// Name quality decides the band; launch count only orders apps within a band,
+// so a heavily used app can never outrank a better name match.
+function score(app, query) {
+  let band;
+  if (app.key === query) band = 4;
+  else if (app.key.startsWith(query)) band = 3;
+  else if (app.words.includes(" " + words(query)) || app.initials.startsWith(query)) band = 2;
+  else if (app.key.includes(query)) band = 1;
+  else return null;
+  return band * 100000 + app.uses;
+}
+```
+
+An exact name wins, then names that start with what I typed, then a word start or initials, then a match anywhere. Changing that order is a one-line edit.
+
+The Pikos capture and the VS Code workspaces are just other kinds of rows, and anything else could be one too. Websites or a project's terminal session would work the same way.
+
+## What I learned
+
+- ⌘Space can't be a normal hotkey. macOS keeps it reserved even after Spotlight's shortcut is unticked, so registering it in Hammerspoon fails. An event tap that catches the key press works, but it needs Accessibility permission.
+- A fixed-size window doesn't jump. The window is sized for the fully open list, and the page only draws the part in use, so the box never resizes while typing.
+- Hide the last frame. Opening the launcher briefly flashed the previous search. It now opens transparent, waits for the page to say it has drawn the empty state, and only then fades in.
+- Background tasks don't get your shell's PATH. The Pikos CLI runs on a Node that Homebrew doesn't link onto the PATH, so the launcher sets one explicitly for that task.
