@@ -40,9 +40,5 @@ It's built on [Hammerspoon](https://www.hammerspoon.org), which lets you script 
 
 ![The launcher confirming the task was added to Pikos](/launcher-captured.webp)
 
-## What I learned
+Spotlight's out of my way for good. Next up is opening a project's terminal session straight from it.
 
-- ⌘Space can't be a normal hotkey. macOS keeps it reserved even after you untick Spotlight's shortcut, so the launcher catches the key press with an event tap. That needs Accessibility permission.
-- A fixed-size window doesn't jump. The window is sized for the full list and the page only draws what's in use, so the box never resizes while typing.
-- Hide the last frame. Opening it used to flash the previous search, so now it fades in only once the page has drawn the empty state.
-- Background tasks don't get your shell's PATH. The Pikos CLI needs a Node that Homebrew doesn't link, so the launcher sets PATH itself.
